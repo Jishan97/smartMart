@@ -236,7 +236,7 @@ app.post('/new', upload.single('image'), async (req, res) => {
 })
 
 
-const port =7777
+const port = process.env.PORT || 7777
 app.listen(port, () => {
   console.log(`Server is running ${port}`)
 })
