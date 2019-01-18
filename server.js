@@ -9,6 +9,7 @@ var {mongoose} = require('./db/mongoose');
 var {Point} = require('./models/details');
 var {NewProducts} =  require('./models/new');
 var {MegaSale} =  require('./models/mega');
+var {Story} = require('./models/story')
 
 
 require('./cloudinary')
@@ -187,6 +188,58 @@ app.post('/point', upload.single('image'), async (req, res) => {
   // })
   res.redirect("/");
 })
+
+
+
+
+
+
+
+
+
+
+
+app.post('/story', upload.single('image'), async (req, res) => {
+  const result = await cloudinary.v2.uploader.upload(req.file.path);
+  const product_name = req.body.product_name;
+  const product_price=req.body.product_price;
+  const product_title=req.body.product_title;
+  const product_barcode=req.body.product_barcode;
+  const product_details=req.body.product_details;
+  const product_type=req.body.product_type;
+
+  console.log(product_name);
+  var story = new Story({
+    imageUrl:result.secure_url,
+    Product_Name:product_name,
+    Product_Price:product_price,
+    Product_Title:product_title,
+    Product_Barcode:product_barcode,
+    Product_Details:product_details,
+    Product_Type:product_type
+  })
+  story.save()
+  .then((url)=>{
+    console.log(url);
+    res.send(url)
+  }).catch(e=>console.log(e))
+  // image.imageUrl = result.secure_url;
+  // await image.save();
+  // res.send({
+  //   message: 'Blog is Created'
+  // })
+  res.redirect("/");
+})
+
+
+
+
+
+
+
+
+
+
 
 
 app.post('/delete', (req, res) => {
