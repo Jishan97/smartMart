@@ -104,6 +104,13 @@ app.get('/point', (req, res) => {
   res.render('pointOfsale')
 })
 
+
+app.get('/story', (req, res) => {
+  res.render('story')
+})
+
+
+
 app.get('/sale', (req, res) => {
   res.render('megaSale')
 })
