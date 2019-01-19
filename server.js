@@ -263,7 +263,7 @@ app.post('/parchaseHistory',  (req, res) => {
   // res.send({
   //   message: 'Blog is Created'
   // })
-  res.redirect("/");
+  //res.redirect("/");
 })
 
 
