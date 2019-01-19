@@ -7,7 +7,8 @@ const todoSchema = new Schema({
 
 
 Username:{
-    type:String
+    type:String,
+    require:true
   
 },
 Email:{
