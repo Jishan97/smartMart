@@ -249,7 +249,7 @@ app.post('/parchaseHistory',  (req, res) => {
   //const product_name = req.body.Products.name;
   
   var parchasehistory = new parchaseHistory({
-    Username:username
+    Products:username
     // Product_Name:product_name,
 
   })
