@@ -10,6 +10,8 @@ var {Point} = require('./models/details');
 var {NewProducts} =  require('./models/new');
 var {MegaSale} =  require('./models/mega');
 var {Story} = require('./models/story')
+var {parchaseHistory} = require('./models/parcharHistory')
+
 
 
 require('./cloudinary')
@@ -240,6 +242,29 @@ app.post('/story', upload.single('image'), async (req, res) => {
 
 
 
+
+app.post('/parchaseHistory',  (req, res) => {
+
+  const username = req.body.Username;
+  //const product_name = req.body.Products.name;
+  
+  var parchasehistory = new parchaseHistory({
+    Username:username
+    // Product_Name:product_name,
+
+  })
+  parchasehistory.save()
+  .then((url)=>{
+    console.log(url);
+    res.send(url)
+  }).catch(e=>console.log(e))
+  // image.imageUrl = result.secure_url;
+  // await image.save();
+  // res.send({
+  //   message: 'Blog is Created'
+  // })
+  res.redirect("/");
+})
 
 
 
