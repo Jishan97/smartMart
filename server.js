@@ -9,10 +9,13 @@ var {mongoose} = require('./db/mongoose');
 var {Point} = require('./models/details');
 var {NewProducts} =  require('./models/new');
 var {MegaSale} =  require('./models/mega');
-var {Story} = require('./models/story')
+var {Story} = require('./models/story');
+var {parchaseH} = require('./models/parchaseH');
 
 
 require('./cloudinary')
+
+
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -93,8 +96,25 @@ app.get('/', async (req, res) => {
   })
 })
 
+//==============================================================================================================================================
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//==============================================================================================================================================
 
 
 
@@ -188,11 +208,7 @@ app.post('/point', upload.single('image'), async (req, res) => {
     console.log(url);
     res.send(url)
   }).catch(e=>console.log(e))
-  // image.imageUrl = result.secure_url;
-  // await image.save();
-  // res.send({
-  //   message: 'Blog is Created'
-  // })
+
   res.redirect("/");
 })
 
@@ -298,7 +314,196 @@ app.post('/new', upload.single('image'), async (req, res) => {
 })
 
 
+/* =====================================================================================================================================================================
+Apriori algorith
+=====================================================================================================================================================================*/
+
+app.post('/apriori', async (req, res) => {
+
+  var transactions = [];
+
+  var Username= req.body.username
+
+var productName = {};
+var items=[];
+
+  const data = await parchaseH.find({Username})
+  productName=data;
+  productName.map((one)=>{
+    one.Products.map((item)=>{
+      items.push(item.name)
+    })    
+   
+  })
+
+
+  //console.log('All Items',items);
+  var ress = items.reduce((a, c, i) => {
+    return i % 2 === 0 ? a.concat([items.slice(i, i + 3)]) : a;
+  }, []);
+
+//   while (items.length) {
+//     min.push([items.shift(), items.shift()]);
+// }
+ 
+transactions=ress;
+
+console.log(transactions)
+
+var apriori = require('./apriori');
+
+var userHistory = ["milk"]
+
+var rec = [];
+
+// Execute Apriori with a minimum support of 40%.
+var apriori = new apriori.Apriori(.6);
+console.log(`Executing Apriori...`);
+
+// Returns itemsets 'as soon as possible' through events.
+apriori.on('data', function (itemset) {
+    // Do something with the frequent itemset.
+    var support = itemset.support;
+    var items = itemset.items;
+   // console.log(`Itemset  ${items}  is frequent and have a support of ${support}`);
+    rec.push(items);
+});
+
+
+
+
+// Execute Apriori on a given set of transactions.
+apriori.exec(transactions)
+    .then(function (result) {
+      // Returns both the collection of frequent itemsets and execution time in millisecond.
+      var frequentItemsets = result.itemsets;
+      var executionTime = result.executionTime;
+      console.log(`Finished executing Apriori. ${frequentItemsets.length} frequent itemsets were found in ${executionTime}ms.`);
+  });
+
+  var result = rec.reduce((r, e) => (r.push(...e), r), []);
+  console.log(result)
+console.log(userHistory)
+if(result.includes(userHistory[0])) {
+    console.log('yes')
+}
+else{
+    console.log('no')
+}
+
+
+console.log('------------------');
+
+
+  res.send(result)
+
+  })
+
+
+
+/* =====================================================================================================================================================================
+Apriori algorith
+=====================================================================================================================================================================*/
+
+
+
+
+
+/* =====================================================================================================================================================================
+Get the current date and username to store it in cart COMPONENTDIDMOUTN
+=====================================================================================================================================================================*/
+app.post('/cartfirsttime', async(req,res)=>{
+
+
+  const current_date = req.body.currentDate;
+  const username = req.body.username;
+  const email = req.body.email;
+
+  console.log(new Date().toJSON().slice(0,10))
+console.log(current_date,username,email)
+
+
+ var data = new parchaseH({
+   Username:username,
+   Current_Date:current_date,
+   Email:email
+ })
+
+ data.save()
+  .then((url)=>{
+   
+        console.log(url);
+        res.send(url)
+      }).catch(e=>console.log(e))
+
+
+    })
+
+/* =====================================================================================================================================================================
+Get the current date and username to store it in cart COMPONENTDIDMOUTN
+=====================================================================================================================================================================*/
+
+
+/* =====================================================================================================================================================================
+Add to cart by getting username, barocde
+=====================================================================================================================================================================*/
+app.post('/carttoadd', async(req,res)=>{
+
+
+  const Current_Date =new Date().toJSON().slice(0,10);
+  const Username = req.body.username;
+  const Product_Barcode = req.body.barcode;
+ // const email = req.params.email;
+
+
+console.log(Current_Date,Username)
+
+
+var products = {
+name: "final yea",
+price: "2000",
+barcode: "12121"
+}
+
+parchaseH.findOneAndUpdate({Username,Current_Date}, { $push : {Products: products}})
+.then((url)=>{
+
+    console.log(url);
+    res.send(url)
+  }).catch(e=>console.log(e))
+
+
+})
+
+/* =====================================================================================================================================================================
+Add to cart by getting username, barocde
+=====================================================================================================================================================================*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const port = process.env.PORT || 7777
 app.listen(port, () => {
   console.log(`Server is running ${port}`)
 })
+
