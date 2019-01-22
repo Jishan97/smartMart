@@ -456,13 +456,24 @@ app.post('/carttoadd', async(req,res)=>{
  // const email = req.params.email;
 
 
-console.log(Current_Date,Username)
+ const fullDetails = await Point.find({Product_Barcode})
 
+console.log(fullDetails);
+
+const productsN=[];
+
+fullDetails.map((oneD)=>{
+  productsN.push(oneD.Product_Barcode);
+})
+
+// const productsN = fullDetails.Product_Name
+
+// console.log(productsN);
 
 var products = {
-name: "final yea",
-price: "2000",
-barcode: "12121"
+name: productsN,
+price: productsN,
+barcode: productsN
 }
 
 parchaseH.findOneAndUpdate({Username,Current_Date}, { $push : {Products: products}})
