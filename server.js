@@ -566,20 +566,20 @@ fullDetails.map((oneD)=>{
   productsN.push(oneD.Product_Name);
 })
 
-fullDetails.map((twoD)=>{
-  productP.push(twoD.Product_Price);
-})
-fullDetails.map((threeD)=>{
-  productB.push(threeD.Product_Barcode);
-})
+// fullDetails.map((twoD)=>{
+//   productP.push(twoD.Product_Price);
+// })
+// fullDetails.map((threeD)=>{
+//   productB.push(threeD.Product_Barcode);
+// })
 // const productsN = fullDetails.Product_Name
 
 // console.log(productsN);
 
 var products = {
 name: productsN,
-price: productsP,
-barcode: productsB
+price: productsN,
+barcode: productsN
 }
 
 parchaseH.findOneAndUpdate({Username,Current_Date}, { $push : {Products: products}})
