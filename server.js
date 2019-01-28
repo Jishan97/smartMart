@@ -557,19 +557,29 @@ app.post('/carttoadd', async(req,res)=>{
 console.log(fullDetails);
 
 const productsN=[];
+const productP=[];
+const productB=[];
+
+
 
 fullDetails.map((oneD)=>{
-  productsN.push(oneD.Product_Barcode);
+  productsN.push(oneD.Product_Name);
 })
 
+fullDetails.map((twoD)=>{
+  productP.push(twoD.Product_Price);
+})
+fullDetails.map((threeD)=>{
+  productB.push(threeD.Product_Barcode);
+})
 // const productsN = fullDetails.Product_Name
 
 // console.log(productsN);
 
 var products = {
 name: productsN,
-price: productsN,
-barcode: productsN
+price: productsP,
+barcode: productsB
 }
 
 parchaseH.findOneAndUpdate({Username,Current_Date}, { $push : {Products: products}})
