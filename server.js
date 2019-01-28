@@ -55,6 +55,18 @@ app.get('/api/pointofsale', async (req, res) => {
 
 
 
+app.get('/api/story', async (req, res) => {
+
+  const story = await Story.find({})
+  console.log(story);
+  res.send(story)
+  
+ 
+})
+
+
+
+
 
 
 
