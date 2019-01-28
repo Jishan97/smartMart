@@ -557,13 +557,15 @@ app.post('/carttoadd', async(req,res)=>{
 console.log(fullDetails);
 
 const productsN=[];
-const productP=[];
-const productB=[];
+const productsP=[];
+const productsB=[];
 
 
 
 fullDetails.map((oneD)=>{
   productsN.push(oneD.Product_Name);
+  productsP.push(oneD.Product_Price);
+  productsB.push(oneD.Product_Barcode)
 })
 
 // fullDetails.map((twoD)=>{
@@ -578,8 +580,8 @@ fullDetails.map((oneD)=>{
 
 var products = {
 name: productsN,
-price: productsN,
-barcode: productsN
+price: productsP,
+barcode: productsB
 }
 
 parchaseH.findOneAndUpdate({Username,Current_Date}, { $push : {Products: products}})
