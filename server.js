@@ -602,6 +602,48 @@ Add to cart by getting username, barocde
 
 
 
+/* =====================================================================================================================================================================
+Get users cart history
+=====================================================================================================================================================================*/
+
+
+
+app.post('/cartH',async(req,res)=>{
+
+  const Current_Date =new Date().toJSON().slice(0,10);
+  const Username = req.body.username;
+  var items=[]
+  var mainD=[];
+  var productName={}
+  var data = await parchaseH.find({Username,Current_Date})
+
+  productName=data;
+  productName.map((one)=>{
+    one.Products.map((item)=>{
+      items.push(item)
+      
+    })    
+   
+  })
+
+
+  items.map((one)=>{
+    if(one.name !== '' && one.price!== '' && one.barcode!=='') {
+      mainD.push(one);
+    }
+  })
+
+  console.log(mainD)
+  res.send(mainD);
+  
+
+
+})
+
+/* =====================================================================================================================================================================
+Get users cart history
+=====================================================================================================================================================================*/
+
 
 
 
