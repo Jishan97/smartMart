@@ -21,15 +21,18 @@ Current_Date:{
 Products:[
     {
         name:{
-            type:String
+            type:String,
+            default:null
 
         },
         price:{
-            type:String
+            type:String,
+            default:null
 
         },
         barcode:{
-            type:String
+            type:String,
+            default:null
 
         }
 
