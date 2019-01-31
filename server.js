@@ -646,6 +646,53 @@ Get users cart history
 
 
 
+/* =====================================================================================================================================================================
+GEt total amount of users
+=====================================================================================================================================================================*/
+
+
+app.post('/gettotal', async (req, res) => {
+
+  var transactions = [];
+
+  var Username= req.body.username
+
+var productName = {};
+var items=[];
+
+  const data = await parchaseH.find({Username})
+  productName=data;
+  productName.map((one)=>{
+    one.Products.map((item)=>{
+
+      if(item.name !== '' && item.price!== '' && item.barcode!=='')  {
+
+      items.push(item.price)
+      }
+    })    
+   
+  })
+
+  var main = items.map(v => parseInt(v, 10));
+
+
+ 
+ const total= main.reduce(function(acc, val) { return acc + val; }, 0)
+console.log(total);
+
+
+res.json(total);
+
+})
+
+
+
+
+/* =====================================================================================================================================================================
+GEt total amount of users
+=====================================================================================================================================================================*/
+
+
 
 
 
