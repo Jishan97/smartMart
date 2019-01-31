@@ -652,7 +652,7 @@ GEt total amount of users
 
 
 app.post('/gettotal', async (req, res) => {
-
+  const Current_Date =new Date().toJSON().slice(0,10);
   var transactions = [];
 
   var Username= req.body.username
@@ -660,7 +660,7 @@ app.post('/gettotal', async (req, res) => {
 var productName = {};
 var items=[];
 
-  const data = await parchaseH.find({Username})
+  const data = await parchaseH.find({Username,Current_Date})
   productName=data;
   productName.map((one)=>{
     one.Products.map((item)=>{
