@@ -334,7 +334,7 @@ Apriori algorith
 app.post('/apriori', async (req, res) => {
 
   var transactions = [];
-
+  var resultF=[];
   var Username= req.body.username
 
 var productName = {};
@@ -395,20 +395,33 @@ apriori.exec(transactions)
   });
 
   var result = rec.reduce((r, e) => (r.push(...e), r), []);
-  console.log(result)
+
 console.log(userHistory)
-if(result.includes(userHistory[0])) {
-    console.log('yes')
-}
-else{
-    console.log('no')
-}
+// if(result.includes(userHistory[0])) {
+//     console.log('yes')
+// }
+// else{
+//     console.log('no')
+// }
 
 
 console.log('------------------');
 
+console.log(result)
 
-  res.send(result)
+result.map((one)=>{
+  if(resultF.includes(one)) {
+
+  }
+else{
+  resultF.push(one)
+}
+
+})
+  
+console.log('final',resultF)
+
+  res.send(resultF)
 
   })
 
