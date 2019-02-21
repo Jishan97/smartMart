@@ -138,6 +138,45 @@ app.get('/point', (req, res) => {
 })
 
 
+
+
+app.get('/customerCart', async(req, res) => {
+
+  const Current_Date =new Date().toJSON().slice(0,10);
+  const Username = 'jishan';
+  var items=[]
+  var mainD=[];
+  var productName={}
+  var data = await parchaseH.find({Username,Current_Date})
+
+  productName=data;
+  productName.map((one)=>{
+    one.Products.map((item)=>{
+      items.push(item)
+      
+    })    
+   
+  })
+
+
+  items.map((one)=>{
+    if(one.name !== '' && one.price!== '' && one.barcode!=='') {
+      mainD.push(one);
+    }
+  })
+
+  console.log(mainD)
+  // res.render('customerCart',mainD)
+
+  res.render('customerCart',{
+    mainD
+  })
+
+
+})
+
+
+
 app.get('/story', (req, res) => {
   res.render('story')
 })
@@ -538,6 +577,55 @@ Store the likes
 
 
 
+/* =====================================================================================================================================================================
+Get likes
+=====================================================================================================================================================================*/
+app.post('/getlike', async(req,res)=>{
+
+
+  //const Current_Date =new Date().toJSON().slice(0,10);
+  const Username = req.body.username;
+  
+console.log(Username)
+
+var sample={}
+const main=[]
+const mainRD=[]
+const data = await Storiesliked.find({Username})
+sample=data
+
+sample.map((one)=>{
+  one.Likes.map((item)=>{
+    // console.log(item.name);
+    if(item.name!=null) {
+   main.push(item.name) 
+    }
+  })    
+ 
+})
+
+
+main.map((one)=>{
+  if(mainRD.includes(one)) {
+
+  }
+else{
+  mainRD.push(one)
+}
+
+})
+  
+console.log(mainRD)
+
+res.send(mainRD)
+})
+
+
+/* =====================================================================================================================================================================
+Get likes
+=====================================================================================================================================================================*/
+
+
 
 
 
@@ -748,23 +836,6 @@ res.send(items);
 /* =====================================================================================================================================================================
 Cross verification
 =====================================================================================================================================================================*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 const port = process.env.PORT || 7777
