@@ -140,15 +140,22 @@ app.get('/point', (req, res) => {
 
 
 
-app.get('/customerCart', async(req, res) => {
+app.get('/customerLogin', (req, res) => {
+  res.render('customerLogin')
+})
+
+
+
+
+app.post('/customer', async(req, res) => {
 
   const Current_Date =new Date().toJSON().slice(0,10);
-  const Username = 'jishan';
+  const Username = req.body.username;
   var items=[]
   var mainD=[];
   var productName={}
   var data = await parchaseH.find({Username,Current_Date})
-
+console.log(Username);
   productName=data;
   productName.map((one)=>{
     one.Products.map((item)=>{
@@ -166,6 +173,8 @@ app.get('/customerCart', async(req, res) => {
   })
 
   console.log(mainD)
+
+  
   // res.render('customerCart',mainD)
 
   res.render('customerCart',{
@@ -266,14 +275,6 @@ app.post('/point', upload.single('image'), async (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
 app.post('/story', upload.single('image'), async (req, res) => {
   const result = await cloudinary.v2.uploader.upload(req.file.path);
   const product_name = req.body.product_name;
@@ -305,15 +306,6 @@ app.post('/story', upload.single('image'), async (req, res) => {
   // })
   res.redirect("/");
 })
-
-
-
-
-
-
-
-
-
 
 
 

@@ -7,6 +7,33 @@
     </div>
     <button type="submit">Add Blog</button>
 </form> --}}
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <a style="color:white;font-family:Cabin" class="navbar-brand" href="/">SmartMart</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a style="color:white" class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+                    <li class="nav-item dropdown">
+        <a style="color:white" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Add products
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+       
+                <a  class="nav-item nav-link" href="/point">Point of sale</a>
+                <a  class="nav-item nav-link" href="/sale"> Mega sale products</a>
+                <a  class="nav-item nav-link" href="/new"> new products</a>
+                <a  class="nav-item nav-link" href="/story"> new story</a>
+        </div>
+      </li>
+                <a style="color:white" class="nav-item nav-link" href="/dashboard">dashbord</a>
+                <a style="color:white"  class="nav-item nav-link" href="/about">About</a>
+
+            </div>
+        </div>
+    </nav>
 <form action="/new" method="post" enctype="multipart/form-data" class="text-center border border-light p-5">
 
     <p class="h4 mb-4">Newly arrived products </p>
