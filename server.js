@@ -375,11 +375,12 @@ var items=[];
   productName=data;
   productName.map((one)=>{
     one.Products.map((item)=>{
+      if(item.name!='')
       items.push(item.name)
     })    
    
   })
-
+console.log('FIRSTLy',items);
 
   //console.log('All Items',items);
   var ress = items.reduce((a, c, i) => {
