@@ -86,7 +86,14 @@ app.get('/images', async (req, res) => {
 //   })
 // })
 
-app.get('/', async (req, res) => {
+app.get('/', (req, res) => {
+  res.render('adminLogin')
+})
+
+
+
+
+app.get('/home', async (req, res) => {
   
   async.concat([Point,MegaSale,NewProducts],function(model,callback) {
     var query = model.find({});
@@ -130,6 +137,12 @@ app.get('/', async (req, res) => {
 //==============================================================================================================================================
 
 
+app.get('/payment', (req, res) => {
+  res.render('payment')
+})
+
+
+
 
 
 
@@ -144,6 +157,9 @@ app.get('/customerLogin', (req, res) => {
   res.render('customerLogin')
 })
 
+app.get('/adminLogin', (req, res) => {
+  res.render('adminLogin')
+})
 
 
 
@@ -164,21 +180,48 @@ console.log(Username);
     })    
    
   })
-
-
   items.map((one)=>{
     if(one.name !== '' && one.price!== '' && one.barcode!=='') {
       mainD.push(one);
     }
   })
-
   console.log(mainD)
 
-  
+
+
+//get the total
+
+
+var productName1 = {};
+var items1=[];
+
+  const data1 = await parchaseH.find({Username,Current_Date})
+  productName1=data1;
+  productName1.map((one)=>{
+    one.Products.map((item)=>{
+
+      if(item.name !== '' && item.price!== '' && item.barcode!=='')  {
+
+      items1.push(item.price)
+      }
+    })    
+   
+  })
+  var main = items1.map(v => parseInt(v, 10));
+ const total= main.reduce(function(acc, val) { return acc + val; }, 0)
+
+
+
+
+
+
+
+
+
   // res.render('customerCart',mainD)
 
   res.render('customerCart',{
-    mainD
+    mainD,total
   })
 
 
@@ -272,8 +315,6 @@ app.post('/point', upload.single('image'), async (req, res) => {
 
   res.redirect("/");
 })
-
-
 
 app.post('/story', upload.single('image'), async (req, res) => {
   const result = await cloudinary.v2.uploader.upload(req.file.path);
@@ -764,19 +805,11 @@ var items=[];
       items.push(item.price)
       }
     })    
-   
   })
-
   var main = items.map(v => parseInt(v, 10));
-
-
- 
  const total= main.reduce(function(acc, val) { return acc + val; }, 0)
 console.log(total);
-
-
 res.json(total);
-
 })
 
 
