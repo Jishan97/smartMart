@@ -1,4 +1,4 @@
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#73C2FB">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:black">
         <a style="color:white;font-family:Cabin" class="navbar-brand" href="/home">SmartMart</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,13 +40,13 @@
       <div class="row justify-content-center  mb-4"> 
        
         {{#each result}}
-        <div class="card shadow" style="width: 20rem;height:600px;margin:5px">
+        <div class="card shadow" style="width: 20rem;height:450px;margin:5px">
             <img class="card-img-top "  height="300" style=" object-fit: cover;
 "  src={{this.imageUrl}} alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title">{{this.Product_Name}}</h5>
-                <p class="card-text">{{this.Product_Details}}.</p>
-                <p class="card-text">{{this.Product_Barcode}}.</p>
+                <p class="card-title">Product Name: {{this.Product_Name}}</p>
+                {{!-- <p class="card-text">{{this.Product_Details}}.</p> --}}
+                <p class="card-text">Product Barcode: {{this.Product_Barcode}}.</p>
                 {{!-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
             </div>
         </div>

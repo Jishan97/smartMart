@@ -228,6 +228,13 @@ var items1=[];
 })
 
 
+app.get('/getAl',(req,res)=>{
+  parchaseH.find({}).then((data)=>{
+    console.log(data)
+    res.send(data)
+  })
+})
+
 
 app.get('/story', (req, res) => {
   res.render('story')
@@ -662,6 +669,43 @@ Get likes
 
 
 
+
+
+/* =====================================================================================================================================================================
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+=====================================================================================================================================================================*/
+
+app.get('/tryr',async(req,res)=>{
+  const pro=[];
+  const pro1=[]
+  const all = await parchaseH.find({Username:'jishan'})
+ // console.log(all)
+ 
+
+  all.map((one)=>{
+    pro.push(one.Products)
+  })
+
+
+pro.map((two)=>{
+  if(two!==undefined && two.length===0){
+    two = [""];
+ }
+  console.log(two)
+  pro1.push(two)
+})
+
+
+res.send(pro)
+// console.log(pro)
+})
+
+
+
+
+/* =====================================================================================================================================================================
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+=====================================================================================================================================================================*/
 
 
 
