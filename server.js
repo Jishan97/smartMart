@@ -738,13 +738,15 @@ console.log(fullDetails);
 const productsN=[];
 const productsP=[];
 const productsB=[];
+const productsI=[];
 
 
 
 fullDetails.map((oneD)=>{
   productsN.push(oneD.Product_Name);
   productsP.push(oneD.Product_Price);
-  productsB.push(oneD.Product_Barcode)
+  productsB.push(oneD.Product_Barcode);
+  productsI.push(oneD.imageUrl)
 })
 
 // fullDetails.map((twoD)=>{
@@ -760,7 +762,8 @@ fullDetails.map((oneD)=>{
 var products = {
 name: productsN,
 price: productsP,
-barcode: productsB
+barcode: productsB,
+image:productsI
 }
 
 parchaseH.findOneAndUpdate({Username,Current_Date}, { $push : {Products: products}})

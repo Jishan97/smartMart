@@ -34,6 +34,10 @@ Products:[
             type:String,
             default:null
 
+        },
+        image:{
+            type:String,
+            default:null
         }
 
     }
