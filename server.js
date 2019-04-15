@@ -842,10 +842,35 @@ var products = {
 
 })
 
+app.post('/whishlistG',async(req,res)=>{
+  const Username = req.body.username;
+  var items=[]
+  var mainD=[];
+  var productName={}
+  var data = await whishlist.find({Username})
+
+  productName=data;
+  productName.map((one)=>{
+    one.Products.map((item)=>{
+      items.push(item)
+      
+    })    
+   
+  })
+
+
+  items.map((one)=>{
+   
+      mainD.push(one);
+    
+  })
+
+  console.log(mainD)
+  res.send(mainD);
 
 
 
-
+})
 
 
 /* =====================================================================================================================================================================
