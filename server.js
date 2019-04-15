@@ -860,9 +860,10 @@ app.post('/whishlistG',async(req,res)=>{
 
 
   items.map((one)=>{
+    if(one.name !== '' && one.price!== '' && one.image!=='') {
    
       mainD.push(one);
-    
+    }
   })
 
   console.log(mainD)
