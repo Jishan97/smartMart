@@ -14,11 +14,11 @@ var {parchaseH} = require('./models/parchaseH');
 var {Storiesliked} = require('./models/storiesliked');
 var {whishlist} = require('./models/whishlist');
 const path = require('path')
+var serveIndex = require('serve-index');
 
 require('./cloudinary')
-app.use(express.static(path.join(__dirname, '.well-known')));
+app.use('/.well-known', express.static('.well-known'), serveIndex('.well-known'));
 
-// app.use('/.well-known', express.static(__dirname + '/.well-known'));
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
