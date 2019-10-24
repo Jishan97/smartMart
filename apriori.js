@@ -18,6 +18,7 @@ var Apriori = /** @class */ (function (_super) {
         _this._support = _support; /*, private _confidence: number*/
         return _this;
     }
+    
     Apriori.prototype.exec = function (transactions, cb) {
         var _this = this;
         this._transactions = transactions;

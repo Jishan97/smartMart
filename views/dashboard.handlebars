@@ -1,3 +1,13 @@
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://www.jqueryscript.net/demo/sorting-filtering-pagination-fancytable/fancyTable.js?v2"></script>
+
+
+
+  <script src="https://www.jqueryscript.net/demo/Excel-like-Bootstrap-Table-Sorting-Filtering-Plugin/excel-bootstrap-table-filter-bundle.js"></script>
+  <link rel="stylesheet" href="https://www.jqueryscript.net/demo/Excel-like-Bootstrap-Table-Sorting-Filtering-Plugin/excel-bootstrap-table-filter-style.css">  
+    
+    
+    
      <nav class="navbar navbar-expand-lg navbar-light" style="background-color:black">
         <a style="color:white;font-family:Cabin" class="navbar-brand" href="/">SmartMart</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -31,7 +41,7 @@
 <div class="container">
   <h2>Stock Management</h2>
         <br>      
-  <table class="table">
+  <table  class="table example">
     <thead>
       <tr>
          
@@ -77,3 +87,22 @@
     </tbody>
   </table>
 </div>
+
+<script>
+  $(".example").fancyTable({
+  sortColumn:0, // column number for initial sorting
+  sortOrder: 'descending', // 'desc', 'descending', 'asc', 'ascending', -1 (descending) and 1 (ascending)
+  sortable: true,
+  pagination: true, // default: false
+  searchable: true,
+  globalSearch: true,
+  globalSearchExcludeColumns: [2,5] // exclude column 2 & 5
+});
+
+
+$('table').excelTableFilter();
+
+
+</script>
+
+
