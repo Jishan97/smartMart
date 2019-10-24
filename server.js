@@ -13,11 +13,12 @@ var {Story} = require('./models/story');
 var {parchaseH} = require('./models/parchaseH');
 var {Storiesliked} = require('./models/storiesliked');
 var {whishlist} = require('./models/whishlist');
-
+const path = require('path')
 
 require('./cloudinary')
+app.use(express.static(path.join(__dirname, '.well-known')));
 
-
+// app.use('/.well-known', express.static(__dirname + '/.well-known'));
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
